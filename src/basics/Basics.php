@@ -4,12 +4,13 @@ namespace basics;
 
 class Basics implements BasicsInterface
 {
+    private BasicsValidator $validator;
 
-    private $validator;
     public function __construct($validator)
     {
-      $this->validator = $validator;
+        $this->validator = $validator;
     }
+
     public function getMinuteQuarter(int $minute): string
     {
         $this->validator->isMinutesException($minute);
