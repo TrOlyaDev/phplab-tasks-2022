@@ -11,6 +11,13 @@ class Basics implements BasicsInterface
         $this->validator = $validator;
     }
 
+    /**
+     *Determination in which quarter of an hour the number of minutes falls.
+     *
+     * @param int $minute
+     * @return string Return one of the values: "first", "second", "third" and "fourth".
+     * @throws \InvalidArgumentException if $minute is negative or greater than 59
+    */
     public function getMinuteQuarter(int $minute): string
     {
         $this->validator->isMinutesException($minute);
@@ -25,15 +32,21 @@ class Basics implements BasicsInterface
             $minute = 60;
         }
         foreach ($minuteQuarters as $quarter) {
-            if ($minute > $quarter[0]) {
-                if ($minute <= $quarter[1]) {
-                    return $quarter[2];
-                }
+            if ($minute > $quarter[0] && $minute <= $quarter[1]) {
+                return $quarter[2];
             }
         }
+
         return "0";
     }
 
+    /**
+     *Determine is it a leap year
+     *
+     * @param int $year
+     * @return bool Return true if the year is leap or false otherwise.
+     * @throws \InvalidArgumentException if $year is lower than 1900.
+     */
     public function isLeapYear(int $year): bool
     {
         $this->validator->isYearException($year);
@@ -49,6 +62,13 @@ class Basics implements BasicsInterface
         }
     }
 
+    /**
+     *Determine is it a leap year
+     *
+     * @param string $input a string of six digits
+     * @return bool Return true if the sum of the first three digits is equal with the sum of last three ones
+     * @throws \InvalidArgumentException if $input contains less or more than 6 digits
+     */
     public function isSumEqual(string $input): bool
     {
         $this->validator->isValidStringException($input);
