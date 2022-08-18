@@ -13,6 +13,6 @@ class SayHelloTest extends TestCase
 
     public function testPositive()
     {
-        $this->assertEquals("Hello", $this->functions->sayHello());
+        $this->assertEquals('Hello', $this->functions->sayHello());
     }
 }

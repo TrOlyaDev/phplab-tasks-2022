@@ -24,9 +24,9 @@ class SayHelloArgumentWrapperTest extends TestCase
     public function negativeDataProvider(): array
     {
         return [
-           [array(1, "friend", true)],
+           [[1, "friend", true]],
            [new DateTime()],
-           [NULL]
+           [null]
         ];
     }
 }
