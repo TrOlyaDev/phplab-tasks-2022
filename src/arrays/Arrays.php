@@ -13,12 +13,12 @@ class Arrays implements ArraysInterface
      */
     public function repeatArrayValues(array $input): array
     {
-        $result = array();
-        foreach ($input as $elem) {
+        $result = [];
+        array_map(function($elem) use (&$result) {
             for ($i = 0; $i < $elem; $i++) {
                 $result[] = $elem;
             }
-        }
+        }, $input);
 
         return $result;
     }
@@ -31,7 +31,7 @@ class Arrays implements ArraysInterface
      */
     public function getUniqueValue(array $input): int
     {
-        $result = array();
+        $result = [];
         $countValues = array_count_values($input);
         foreach ($countValues as $key => $value) {
             if ($value == 1) {
@@ -50,12 +50,12 @@ class Arrays implements ArraysInterface
      */
     public function groupByTag(array $input): array
     {
-        foreach ($input as $elem) {
+        $result = [];
+        array_map(function($elem) use (&$result) {
             foreach ($elem['tags'] as $tag) {
                 $result[$tag][] = $elem['name'];
             }
-
-        }
+        }, $input);
         ksort($result);
         foreach ($result as $key => &$value) {
             sort($value);
