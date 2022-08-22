@@ -10,16 +10,24 @@
 namespace src\oop\app\src;
 
 use src\oop\app\src\Models\Movie;
+use src\oop\app\src\Parsers\ParserInterface;
+use src\oop\app\src\Transporters\TransportInterface;
 
 class Scrapper
 {
     private $transporter;
     private $parser;
+    private $movie;
 
-    public function __construct($transporter, $parser)
+    /**
+     * @param TransportInterface $transporter
+     * @param ParserInterface $parser
+     */
+    public function __construct(TransportInterface $transporter, ParserInterface $parser)
     {
        $this->transporter = $transporter;
        $this->parser = $parser;
+       $this->movie = new Movie();
     }
 
     /**
@@ -30,13 +38,12 @@ class Scrapper
      */
     public function getMovie(string $url): Movie
     {
-        $movie = new Movie();
         $content = $this->transporter->getContent($url);
         $movieData = $this->parser->parseContent($content);
-        $movie->setTitle($movieData['title']);
-        $movie->setPoster($movieData['poster']);
-        $movie->setDescription($movieData['description']);
+        $this->movie->setTitle($movieData['title']);
+        $this->movie->setPoster($movieData['poster']);
+        $this->movie->setDescription($movieData['description']);
 
-        return $movie;
+        return $this->movie;
     }
 }

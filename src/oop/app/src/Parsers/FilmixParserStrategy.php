@@ -9,7 +9,7 @@ class FilmixParserStrategy implements ParserInterface
      */
     public function parseContent(string $siteContent)
     {
-        $siteContent = iconv('CP1251',mb_detect_encoding($siteContent), $siteContent);
+        $siteContent = iconv('CP1251', mb_detect_encoding($siteContent), $siteContent);
         preg_match('#<h1[^>]+?class\s*?=\s*?(["\'])name\1[^>]*?>(.+?)</h1>#su', $siteContent, $matchesTitle);
         preg_match('#<meta[^>]+?property\s*?=\s*?(["\'])og:image\1\w*?\s*?content\s*?=\s*?(["\'])(.+?)\2[^>]*?>#su', $siteContent, $matchesPoster);
         preg_match('#<div[^>]+?class\s*?=\s*?(["\'])full-story\1[^>]*?>(.+?)</div>#su', $siteContent, $matchesDesciption);
