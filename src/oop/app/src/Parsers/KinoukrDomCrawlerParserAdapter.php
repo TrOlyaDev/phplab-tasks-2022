@@ -8,9 +8,12 @@ class KinoukrDomCrawlerParserAdapter implements ParserInterface
 {
     private $crawler;
 
-    public function __construct()
+    /**
+     * @param Crawler $crawler
+     */
+    public function __construct(Crawler $crawler)
     {
-        $this->crawler = new Crawler();
+        $this->crawler = $crawler;
     }
 
     /**

@@ -22,12 +22,13 @@ class Scrapper
     /**
      * @param TransportInterface $transporter
      * @param ParserInterface $parser
+     * @param Movie $movie
      */
-    public function __construct(TransportInterface $transporter, ParserInterface $parser)
+    public function __construct(TransportInterface $transporter, ParserInterface $parser, Movie $movie)
     {
        $this->transporter = $transporter;
        $this->parser = $parser;
-       $this->movie = new Movie();
+       $this->movie = $movie;
     }
 
     /**

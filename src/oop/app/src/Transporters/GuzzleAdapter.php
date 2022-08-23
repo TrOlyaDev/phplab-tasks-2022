@@ -8,9 +8,12 @@ class GuzzleAdapter implements TransportInterface
 {
     private $client;
 
-    public function __construct()
+    /**
+     * @param Client $client
+     */
+    public function __construct(Client $client)
     {
-        $this->client = new Client();
+        $this->client = $client;
     }
 
     /**
