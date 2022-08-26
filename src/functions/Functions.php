@@ -57,7 +57,9 @@ class Functions
      */
     public function sayHelloArgumentWrapper($arg): string
     {
-        // put your code here
+        if (!is_numeric($arg) && !is_string($arg) && !is_bool($arg)) {
+            throw new \InvalidArgumentException("Argument is not a number, a string or bool");
+        }
 
         return $this->sayHelloArgument($arg);
     }
@@ -91,6 +93,14 @@ class Functions
      */
     public function countArgumentsWrapper(): array
     {
-        // put your code here
+        $argCount = func_num_args();
+        $argValues = func_get_args();
+        for ($i = 0; $i < $argCount; $i++) {
+            if (!is_string($argValues[$i])) {
+                throw new \InvalidArgumentException("All arguments should be strings");
+            }
+        }
+
+        return $this->countArguments(...$argValues);
     }
 }
